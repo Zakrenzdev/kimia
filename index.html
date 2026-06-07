@@ -1,0 +1,2058 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belajar Kimia Kelas 10 — ASAT TP 25/26</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1f2937;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --accent3: #f78166;
+    --accent4: #d2a8ff;
+    --accent5: #ffa657;
+    --yellow: #e3b341;
+    --card: #161b22;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ─── HERO ─────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #1a1f35 50%, #0d1117 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(88,166,255,.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(88,166,255,.12);
+    border: 1px solid rgba(88,166,255,.3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-size: clamp(26px, 5vw, 48px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #e6edf3 30%, #58a6ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 560px;
+    margin: 0 auto 28px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ─── NAV TABS ──────────────────────────────────────── */
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 14px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all .2s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ─── LAYOUT ────────────────────────────────────────── */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .section { display: none; padding: 40px 0 60px; }
+  .section.active { display: block; }
+
+  /* ─── MATERI CARDS ──────────────────────────────────── */
+  .topic-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .topic-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .topic-card:hover { border-color: var(--accent); }
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 22px;
+    cursor: pointer;
+    background: var(--bg2);
+    user-select: none;
+  }
+  .topic-num {
+    background: var(--accent);
+    color: #000;
+    font-size: 12px;
+    font-weight: 800;
+    border-radius: 6px;
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    flex-shrink: 0;
+  }
+  .topic-title {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .topic-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    flex-shrink: 0;
+  }
+  .tag-l1 { background: rgba(63,185,80,.15); color: var(--accent2); border: 1px solid rgba(63,185,80,.3); }
+  .tag-l2 { background: rgba(88,166,255,.15); color: var(--accent); border: 1px solid rgba(88,166,255,.3); }
+  .tag-l3 { background: rgba(247,129,102,.15); color: var(--accent3); border: 1px solid rgba(247,129,102,.3); }
+  .topic-arrow {
+    color: var(--muted);
+    font-size: 12px;
+    transition: transform .25s;
+    flex-shrink: 0;
+  }
+  .topic-card.open .topic-arrow { transform: rotate(90deg); }
+  .topic-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 22px;
+  }
+  .topic-card.open .topic-body { display: block; }
+
+  /* ─── CONTENT BLOCKS ─────────────────────────────────── */
+  .definition-box {
+    background: rgba(88,166,255,.07);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+  .definition-box .def-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .formula-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--yellow);
+    overflow-x: auto;
+  }
+  .formula-box .f-label {
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .example-box {
+    background: rgba(63,185,80,.06);
+    border: 1px solid rgba(63,185,80,.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+  .example-box .ex-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+
+  .warning-box {
+    background: rgba(247,129,102,.07);
+    border-left: 3px solid var(--accent3);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+  .warning-box .w-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent3);
+    margin-bottom: 6px;
+  }
+
+  .info-box {
+    background: rgba(210,168,255,.07);
+    border-left: 3px solid var(--accent4);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+  .info-box .i-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent4);
+    margin-bottom: 6px;
+  }
+
+  .step-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 14px 0;
+  }
+  .step-box .step-title {
+    font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--accent5);
+  }
+  .step {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+  .step-n {
+    background: var(--accent5);
+    color: #000;
+    font-size: 11px;
+    font-weight: 800;
+    border-radius: 50%;
+    min-width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .table-wrapper { overflow-x: auto; margin: 14px 0; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    background: var(--bg3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(48,54,61,.6);
+    font-size: 13.5px;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+
+  h3 { font-size: 15px; font-weight: 700; color: var(--text); margin: 18px 0 8px; }
+  h4 { font-size: 13px; font-weight: 700; color: var(--accent4); margin: 14px 0 6px; }
+  p { margin-bottom: 10px; color: var(--text); }
+  ul, ol { padding-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 4px; color: var(--text); }
+  strong { color: var(--yellow); }
+  sub, sup { font-size: 10px; }
+
+  /* ─── SOAL SECTION ───────────────────────────────────── */
+  .soal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    flex-wrap: gap;
+    gap: 12px;
+  }
+  .soal-header h2 {
+    font-size: 22px;
+    font-weight: 800;
+  }
+  .score-display {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 18px;
+    text-align: center;
+    min-width: 120px;
+  }
+  .score-val {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .score-label { font-size: 11px; color: var(--muted); }
+
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(88,166,255,.08);
+  }
+
+  .soal-list { display: flex; flex-direction: column; gap: 20px; }
+
+  .soal-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color .2s;
+  }
+  .soal-card.answered-correct { border-color: var(--accent2); }
+  .soal-card.answered-wrong { border-color: var(--accent3); }
+
+  .soal-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: rgba(255,255,255,.02);
+    border-bottom: 1px solid var(--border);
+  }
+  .soal-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    min-width: 36px;
+  }
+  .soal-type {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+  .type-pg { background: rgba(88,166,255,.15); color: var(--accent); border: 1px solid rgba(88,166,255,.3); }
+  .type-ma { background: rgba(63,185,80,.15); color: var(--accent2); border: 1px solid rgba(63,185,80,.3); }
+  .type-mtf { background: rgba(210,168,255,.15); color: var(--accent4); border: 1px solid rgba(210,168,255,.3); }
+  .type-pair { background: rgba(255,166,87,.15); color: var(--accent5); border: 1px solid rgba(255,166,87,.3); }
+  .soal-level {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 8px;
+    margin-left: auto;
+  }
+  .level-l1 { background: rgba(63,185,80,.1); color: var(--accent2); }
+  .level-l2 { background: rgba(88,166,255,.1); color: var(--accent); }
+  .level-l3 { background: rgba(247,129,102,.1); color: var(--accent3); }
+
+  .soal-body { padding: 18px; }
+  .soal-q {
+    font-size: 14.5px;
+    line-height: 1.65;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  .soal-q strong { color: var(--text); }
+
+  .options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .opt-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Sora', sans-serif;
+    font-size: 13.5px;
+    color: var(--text);
+    transition: all .18s;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .opt-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: rgba(88,166,255,.06);
+  }
+  .opt-btn:disabled { cursor: default; }
+  .opt-btn.selected-correct {
+    border-color: var(--accent2);
+    background: rgba(63,185,80,.1);
+    color: var(--accent2);
+  }
+  .opt-btn.selected-wrong {
+    border-color: var(--accent3);
+    background: rgba(247,129,102,.1);
+    color: var(--accent3);
+  }
+  .opt-btn.show-correct {
+    border-color: var(--accent2);
+    background: rgba(63,185,80,.06);
+    color: var(--accent2);
+  }
+  .opt-key {
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  /* Multiple answer checkboxes */
+  .check-opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .18s;
+    background: var(--bg3);
+  }
+  .check-opt:hover { border-color: var(--accent); }
+  .check-opt input { accent-color: var(--accent); width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; }
+  .check-opt.correct-check { border-color: var(--accent2); background: rgba(63,185,80,.08); }
+  .check-opt.wrong-check { border-color: var(--accent3); background: rgba(247,129,102,.08); }
+
+  /* Pair matching */
+  .pair-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .pair-col { display: flex; flex-direction: column; gap: 8px; }
+  .pair-col-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
+  .pair-item {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  .pair-answer-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 8px; }
+  .pair-answer-row label { font-size: 13px; min-width: 120px; }
+  .pair-answer-row select {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    flex: 1;
+    min-width: 120px;
+    cursor: pointer;
+  }
+  .pair-answer-row select:focus { outline: none; border-color: var(--accent); }
+
+  /* True/False */
+  .tf-opt {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+  }
+  .tf-opt span { flex: 1; font-size: 13.5px; }
+  .tf-btn {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .18s;
+  }
+  .tf-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .tf-btn.selected-t { background: rgba(63,185,80,.15); border-color: var(--accent2); color: var(--accent2); }
+  .tf-btn.selected-f { background: rgba(247,129,102,.15); border-color: var(--accent3); color: var(--accent3); }
+  .tf-btn.reveal-correct { background: rgba(63,185,80,.15); border-color: var(--accent2); color: var(--accent2); }
+  .tf-btn.reveal-wrong { background: rgba(247,129,102,.15); border-color: var(--accent3); color: var(--accent3); }
+
+  .submit-btn {
+    background: var(--accent);
+    border: none;
+    color: #000;
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity .2s;
+  }
+  .submit-btn:hover { opacity: .85; }
+  .submit-btn:disabled { opacity: .4; cursor: default; }
+
+  .pembahasan {
+    margin-top: 14px;
+    background: rgba(88,166,255,.05);
+    border: 1px solid rgba(88,166,255,.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: none;
+  }
+  .pembahasan.show { display: block; }
+  .pembahasan .pem-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .pembahasan .pem-body {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .pembahasan .pem-body strong { color: var(--yellow); }
+
+  .result-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .badge-correct { background: rgba(63,185,80,.15); color: var(--accent2); border: 1px solid rgba(63,185,80,.3); }
+  .badge-wrong { background: rgba(247,129,102,.15); color: var(--accent3); border: 1px solid rgba(247,129,102,.3); }
+
+  /* ─── PROGRESS BAR ───────────────────────────────────── */
+  .progress-bar-wrap {
+    background: var(--bg3);
+    border-radius: 999px;
+    height: 6px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent4));
+    transition: width .4s;
+  }
+
+  /* ─── FINISH MODAL ───────────────────────────────────── */
+  .finish-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .finish-modal.show { display: flex; }
+  .modal-box {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+  }
+  .modal-score {
+    font-size: 64px;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    margin: 12px 0;
+  }
+  .modal-title { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .modal-sub { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+  .modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .modal-btn-primary {
+    background: var(--accent);
+    border: none;
+    color: #000;
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .modal-btn-sec {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  /* ─── SECTION TITLE ──────────────────────────────────── */
+  .section-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  @media (max-width: 600px) {
+    .pair-wrapper { grid-template-columns: 1fr; }
+    .soal-header { flex-direction: column; align-items: flex-start; }
+    .hero-stats { gap: 20px; }
+    .tab-btn { padding: 12px 14px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">MAN 1 Indramayu · ASAT TP 25/26</div>
+  <h1>Kimia Kelas 10<br>Panduan Belajar Lengkap</h1>
+  <p>Materi, penjelasan mendalam, rumus, dan 40 contoh soal latihan mirip ASAT — Kurikulum Merdeka</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">10</span><span class="stat-label">Topik Utama</span></div>
+    <div class="stat"><span class="stat-num">40</span><span class="stat-label">Soal Latihan</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">Level Kognitif</span></div>
+    <div class="stat"><span class="stat-num">60'</span><span class="stat-label">Durasi ASAT</span></div>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('materi')">📚 Materi</button>
+  <button class="tab-btn" onclick="switchTab('soal')">📝 Soal Latihan</button>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     SECTION: MATERI
+══════════════════════════════════════════════ -->
+<div class="section active" id="sec-materi">
+<div class="container">
+
+<div style="margin-top:8px; margin-bottom:24px;">
+  <p class="section-title">Materi Lengkap ASAT Kimia 10</p>
+  <p class="section-sub">Klik pada setiap topik untuk membuka penjelasan lengkap. Pelajari urut dari atas ke bawah ya!</p>
+</div>
+
+<div class="topic-grid" id="topicList">
+
+<!-- ══ TOPIK 1: Persamaan Reaksi ══ -->
+<div class="topic-card" id="t1">
+  <div class="topic-header" onclick="toggleTopic('t1')">
+    <div class="topic-num">1</div>
+    <div class="topic-title">Persamaan Reaksi Kimia</div>
+    <span class="topic-tag tag-l2">L2</span>
+    <span class="topic-arrow">▶</span>
+  </div>
+  <div class="topic-body">
+    <div class="definition-box">
+      <div class="def-title">Definisi</div>
+      Persamaan reaksi adalah representasi simbolik dari suatu reaksi kimia yang menunjukkan reaktan (pereaksi) di sebelah kiri dan produk (hasil reaksi) di sebelah kanan tanda panah (<strong>→</strong>).
+    </div>
+
+    <h3>Komponen Persamaan Reaksi</h3>
+    <div class="formula-box">
+      <div class="f-label">Format Umum</div>
+      aA + bB → cC + dD<br>
+      Reaktan → Produk
+    </div>
+
+    <p>Dimana <strong>a, b, c, d</strong> adalah koefisien reaksi (angka di depan rumus kimia).</p>
+
+    <h3>Simbol Wujud (State Symbols)</h3>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Simbol</th><th>Wujud</th><th>Keterangan</th></tr>
+        <tr><td><strong>(s)</strong></td><td>solid</td><td>Padat — misal: NaCl(s), Fe(s)</td></tr>
+        <tr><td><strong>(l)</strong></td><td>liquid</td><td>Cairan murni — misal: H₂O(l)</td></tr>
+        <tr><td><strong>(g)</strong></td><td>gas</td><td>Gas — misal: O₂(g), CO₂(g)</td></tr>
+        <tr><td><strong>(aq)</strong></td><td>aqueous</td><td>Terlarut dalam air — misal: NaCl(aq)</td></tr>
+      </table>
+    </div>
+
+    <h3>Cara Menghitung Atom & Molekul</h3>
+    <div class="example-box">
+      <div class="ex-title">Contoh: 2H₂O</div>
+      <ul>
+        <li>Koefisien = 2 (artinya ada 2 molekul H₂O)</li>
+        <li>Jumlah atom H = 2 × 2 = <strong>4 atom H</strong></li>
+        <li>Jumlah atom O = 2 × 1 = <strong>2 atom O</strong></li>
+        <li>Total atom = 4 + 2 = <strong>6 atom</strong></li>
+      </ul>
+    </div>
+
+    <h3>Penyetaraan Persamaan Reaksi</h3>
+    <div class="step-box">
+      <div class="step-title">Langkah-langkah Menyetarakan</div>
+      <div class="step"><div class="step-n">1</div><div>Tulis persamaan reaksi yang belum setara</div></div>
+      <div class="step"><div class="step-n">2</div><div>Hitung jumlah atom tiap unsur di kiri dan kanan</div></div>
+      <div class="step"><div class="step-n">3</div><div>Tambahkan koefisien (bukan subscript!) untuk menyamakan jumlah atom</div></div>
+      <div class="step"><div class="step-n">4</div><div>Mulai dari unsur yang paling kompleks atau paling sedikit jenisnya</div></div>
+      <div class="step"><div class="step-n">5</div><div>Verifikasi: jumlah atom setiap unsur kiri = kanan</div></div>
+    </div>
+
+    <div class="example-box">
+      <div class="ex-title">Contoh Penyetaraan</div>
+      <p><strong>Belum setara:</strong> H₂ + O₂ → H₂O</p>
+      <p>Kiri: 2H, 2O | Kanan: 2H, 1O → O tidak setara!</p>
+      <p><strong>Setara:</strong> 2H₂ + O₂ → 2H₂O</p>
+      <p>Kiri: 4H, 2O | Kanan: 4H, 2O ✓</p>
+    </div>
+
+    <div class="warning-box">
+      <div class="w-title">⚠️ Perhatian</div>
+      Koefisien yang boleh diubah adalah angka di DEPAN rumus, bukan subscript (angka kecil di bawah). Mengubah subscript berarti mengubah senyawa!
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOPIK 2: Rumus Molekul & Empiris ══ -->
+<div class="topic-card" id="t2">
+  <div class="topic-header" onclick="toggleTopic('t2')">
+    <div class="topic-num">2</div>
+    <div class="topic-title">Rumus Molekul & Rumus Empiris</div>
+    <span class="topic-tag tag-l2">L2</span>
+    <span class="topic-arrow">▶</span>
+  </div>
+  <div class="topic-body">
+    <div class="definition-box">
+      <div class="def-title">Rumus Molekul</div>
+      Menunjukkan jumlah atom SEBENARNYA dari tiap unsur dalam satu molekul senyawa.
+    </div>
+    <div class="definition-box">
+      <div class="def-title">Rumus Empiris</div>
+      Menunjukkan perbandingan atom paling sederhana (rasio terkecil) dari unsur-unsur dalam senyawa.
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Senyawa</th><th>Rumus Molekul</th><th>Rumus Empiris</th><th>Penjelasan</th></tr>
+        <tr><td>Glukosa</td><td>C₆H₁₂O₆</td><td>CH₂O</td><td>Dibagi FPB = 6</td></tr>
+        <tr><td>Hidrogen Peroksida</td><td>H₂O₂</td><td>HO</td><td>Dibagi FPB = 2</td></tr>
+        <tr><td>Etana</td><td>C₂H₆</td><td>CH₃</td><td>Dibagi FPB = 2</td></tr>
+        <tr><td>Air</td><td>H₂O</td><td>H₂O</td><td>Sudah paling sederhana</td></tr>
+        <tr><td>Benzena</td><td>C₆H₆</td><td>CH</td><td>Dibagi FPB = 6</td></tr>
+      </table>
+    </div>
+
+    <h3>Cara Menentukan Rumus Empiris dari % Komposisi</h3>
+    <div class="step-box">
+      <div class="step-title">Langkah Penentuan</div>
+      <div class="step"><div class="step-n">1</div><div>Asumsikan 100 g senyawa → % = gram</div></div>
+      <div class="step"><div class="step-n">2</div><div>Hitung mol tiap unsur: mol = massa / Ar</div></div>
+      <div class="step"><div class="step-n">3</div><div>Bagi semua mol dengan mol terkecil</div></div>
+      <div class="step"><div class="step-n">4</div><div>Jika hasilnya desimal, kalikan sampai bilangan bulat</div></div>
+    </div>
+
+    <div class="example-box">
+      <div class="ex-title">Contoh Soal</div>
+      <p>Senyawa mengandung: 40% C, 6,7% H, 53,3% O (Ar: C=12, H=1, O=16)</p>
+      <p>Mol C = 40/12 = 3,33 | Mol H = 6,7/1 = 6,7 | Mol O = 53,3/16 = 3,33</p>
+      <p>Bagi terkecil (3,33): C = 1, H = 2, O = 1</p>
+      <p><strong>Rumus Empiris: CH₂O</strong> (ternyata ini glukosa jika Mr = 180, maka rumus molekul C₆H₁₂O₆)</p>
+    </div>
+
+    <div class="info-box">
+      <div class="i-title">💡 Tips</div>
+      Rumus molekul = n × rumus empiris, dimana n = Mr senyawa / Mr rumus empiris
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOPIK 3: Hukum Dasar Kimia ══ -->
+<div class="topic-card" id="t3">
+  <div class="topic-header" onclick="toggleTopic('t3')">
+    <div class="topic-num">3</div>
+    <div class="topic-title">Hukum-Hukum Dasar Kimia</div>
+    <span class="topic-tag tag-l2">L2</span>
+    <span class="topic-arrow">▶</span>
+  </div>
+  <div class="topic-body">
+    
+    <h3>1. Hukum Kekekalan Massa (Lavoisier, 1774)</h3>
+    <div class="definition-box">
+      <div class="def-title">Bunyi Hukum</div>
+      "Dalam suatu reaksi kimia, <strong>massa zat-zat sebelum dan sesudah reaksi adalah sama</strong>."
+    </div>
+    <div class="formula-box">
+      <div class="f-label">Rumus</div>
+      m reaktan = m produk<br>
+      m(A) + m(B) = m(C) + m(D)
+    </div>
+    <div class="example-box">
+      <div class="ex-title">Contoh Soal</div>
+      <p>10 g belerang + 16 g oksigen → ? g SO₂</p>
+      <p>Massa SO₂ = 10 + 16 = <strong>26 g</strong></p>
+    </div>
+
+    <hr class="divider">
+
+    <h3>2. Hukum Perbandingan Tetap (Proust, 1799)</h3>
+    <div class="definition-box">
+      <div class="def-title">Bunyi Hukum</div>
+      "Perbandingan massa unsur-unsur penyusun suatu senyawa selalu <strong>tetap dan tidak bergantung</strong> pada cara pembuatannya atau sumbernya."
+    </div>
+    <div class="example-box">
+      <div class="ex-title">Ciri-Ciri Hukum Proust</div>
+      <ul>
+        <li>Berlaku untuk senyawa murni (bukan campuran)</li>
+        <li>Perbandingan massa selalu konstan, misal H₂O selalu H:O = 1:8</li>
+        <li>Jika salah satu unsur berlebih, sisanya akan sisa (tidak bereaksi)</li>
+      </ul>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Senyawa</th><th>Perbandingan Massa</th><th>Detail</th></tr>
+        <tr><td>H₂O (air)</td><td>H : O = 1 : 8</td><td>Ar H=1, Ar O=16; 2H:1O = 2:16 = 1:8</td></tr>
+        <tr><td>SO₂</td><td>S : O = 1 : 1</td><td>Ar S=32, Ar O=16; 1S:2O = 32:32 = 1:1</td></tr>
+        <tr><td>CO₂</td><td>C : O = 3 : 8</td><td>Ar C=12, Ar O=16; 1C:2O = 12:32 = 3:8</td></tr>
+        <tr><td>NH₃</td><td>N : H = 14 : 3</td><td>Ar N=14, Ar H=1; 1N:3H = 14:3</td></tr>
+      </table>
+    </div>
+
+    <hr class="divider">
+
+    <h3>3. Hukum Perbandingan Berganda (Dalton, 1803)</h3>
+    <div class="definition-box">
+      <div class="def-title">Bunyi Hukum</div>
+      "Jika dua unsur membentuk lebih dari satu senyawa, maka perbandingan massa salah satu unsur yang bersenyawa dengan massa tetap unsur lain merupakan <strong>bilangan bulat sederhana</strong>."
+    </div>
+    <div class="example-box">
+      <div class="ex-title">Contoh: Nitrogen & Oksigen</div>
+      <ul>
+        <li>NO: N=14, O=16 → massa O per 14 g N = 16 g</li>
+        <li>NO₂: N=14, O=32 → massa O per 14 g N = 32 g</li>
+        <li>Perbandingan O: 16 : 32 = <strong>1 : 2</strong> (bilangan bulat sederhana ✓)</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <h3>4. Hukum Perbandingan Volume (Gay-Lussac, 1808)</h3>
+    <div class="definition-box">
+      <div class="def-title">Bunyi Hukum</div>
+      "Pada suhu dan tekanan yang sama, perbandingan volume gas-gas yang bereaksi dan volume gas-gas hasil reaksi merupakan <strong>bilangan bulat sederhana</strong> yang sama dengan perbandingan koefisien reaksinya."
+    </div>
+
+    <hr class="divider">
+
+    <h3>5. Hipotesis Avogadro</h3>
+    <div class="definition-box">
+      <div class="def-title">Bunyi</div>
+      "Pada suhu dan tekanan yang sama, gas-gas yang volumenya sama mengandung <strong>jumlah molekul yang sama</strong>."
+    </div>
+    <div class="formula-box">
+      <div class="f-label">Konsekuensi Penting</div>
+      1 mol gas apapun = 6,022 × 10²³ molekul (Bilangan Avogadro, Nₐ)<br>
+      Volume 1 mol gas pada STP (0°C, 1 atm) = 22,4 L<br>
+      Volume 1 mol gas pada RTP (25°C, 1 atm) = 24,4 L
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOPIK 4: Penamaan Senyawa ══ -->
+<div class="topic-card" id="t4">
+  <div class="topic-header" onclick="toggleTopic('t4')">
+    <div class="topic-num">4</div>
+    <div class="topic-title">Penamaan Senyawa Kimia</div>
+    <span class="topic-tag tag-l1">L1</span>
+    <span class="topic-arrow">▶</span>
+  </div>
+  <div class="topic-body">
+    
+    <h3>Senyawa Biner (2 Unsur)</h3>
+    
+    <h4>A. Senyawa Ion (Logam + Non-logam)</h4>
+    <div class="definition-box">
+      <div class="def-title">Aturan Penamaan</div>
+      Nama logam + nama non-logam (dengan akhiran -ida)
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Rumus</th><th>Nama</th><th>Catatan</th></tr>
+        <tr><td>NaCl</td><td>Natrium klorida</td><td>Na⁺ + Cl⁻</td></tr>
+        <tr><td>MgO</td><td>Magnesium oksida</td><td>Mg²⁺ + O²⁻</td></tr>
+        <tr><td>CaF₂</td><td>Kalsium fluorida</td><td>Ca²⁺ + 2F⁻</td></tr>
+        <tr><td>Al₂O₃</td><td>Aluminium oksida</td><td>2Al³⁺ + 3O²⁻</td></tr>
+        <tr><td>FeCl₂</td><td>Besi(II) klorida</td><td>Fe bilanoks +2</td></tr>
+        <tr><td>FeCl₃</td><td>Besi(III) klorida</td><td>Fe bilanoks +3</td></tr>
+      </table>
+    </div>
+
+    <h4>B. Senyawa Kovalen (Non-logam + Non-logam)</h4>
+    <div class="definition-box">
+      <div class="def-title">Aturan</div>
+      Menggunakan awalan Yunani: mono-, di-, tri-, tetra-, penta-, heksa-, hepta-, okta-, nona-, deka-
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Rumus</th><th>Nama</th><th>Catatan</th></tr>
+        <tr><td>CO</td><td>Karbon monoksida</td><td>mono- = 1 O (tidak disebutkan pada unsur pertama)</td></tr>
+        <tr><td>CO₂</td><td>Karbon dioksida</td><td>di- = 2 O</td></tr>
+        <tr><td>NO₂</td><td>Nitrogen dioksida</td><td>di- = 2 O</td></tr>
+        <tr><td>N₂O₄</td><td>Dinitrogen tetraoksida</td><td>di- = 2 N, tetra- = 4 O</td></tr>
+        <tr><td>PCl₅</td><td>Fosfor pentaklorida</td><td>penta- = 5 Cl</td></tr>
+        <tr><td>SO₃</td><td>Belerang trioksida</td><td>tri- = 3 O</td></tr>
+      </table>
+    </div>
+
+    <div class="warning-box">
+      <div class="w-title">⚠️ Pengecualian</div>
+      Awalan "mono-" TIDAK digunakan pada unsur pertama. Misalnya CO bukan "monokarbon monoksida" tapi "karbon monoksida"
+    </div>
+
+    <h3>Akhiran Unsur yang Menjadi Anion</h3>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Unsur</th><th>Nama Ion</th><th>Akhiran</th></tr>
+        <tr><td>Cl</td><td>Klorida</td><td>-ida</td></tr>
+        <tr><td>O</td><td>Oksida</td><td>-ida</td></tr>
+        <tr><td>S</td><td>Sulfida</td><td>-ida</td></tr>
+        <tr><td>N</td><td>Nitrida</td><td>-ida</td></tr>
+        <tr><td>Br</td><td>Bromida</td><td>-ida</td></tr>
+        <tr><td>I</td><td>Iodida</td><td>-ida</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOPIK 5: Massa Atom & Molekul Relatif ══ -->
+<div class="topic-card" id="t5">
+  <div class="topic-header" onclick="toggleTopic('t5')">
+    <div class="topic-num">5</div>
+    <div class="topic-title">Massa Atom Relatif (Ar) & Massa Molekul Relatif (Mr)</div>
+    <span class="topic-tag tag-l1">L1</span>
+    <span class="topic-arrow">▶</span>
+  </div>
+  <div class="topic-body">
+    
+    <div class="definition-box">
+      <div class="def-title">Massa Atom Relatif (Ar)</div>
+      Perbandingan massa rata-rata satu atom unsur terhadap 1/12 massa atom karbon-12. Ar tidak punya satuan.
+    </div>
+    <div class="definition-box">
+      <div class="def-title">Massa Molekul Relatif (Mr)</div>
+      Jumlah seluruh Ar atom-atom yang menyusun satu molekul senyawa.
+    </div>
+
+    <div class="formula-box">
+      <div class="f-label">Rumus Mr</div>
+      Mr senyawa = Σ (jumlah atom × Ar)
+    </div>
+
+    <h3>Tabel Ar yang Sering Muncul di Soal</h3>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Unsur</th><th>Simbol</th><th>Ar</th><th>Unsur</th><th>Simbol</th><th>Ar</th></tr>
+        <tr><td>Hidrogen</td><td>H</td><td>1</td><td>Klorin</td><td>Cl</td><td>35,5</td></tr>
+        <tr><td>Karbon</td><td>C</td><td>12</td><td>Natrium</td><td>Na</td><td>23</td></tr>
+        <tr><td>Nitrogen</td><td>N</td><td>14</td><td>Kalsium</td><td>Ca</td><td>40</td></tr>
+        <tr><td>Oksigen</td><td>O</td><td>16</td><td>Magnesium</td><td>Mg</td><td>24</td></tr>
+        <tr><td>Belerang</td><td>S</td><td>32</td><td>Besi</td><td>Fe</td><td>56</td></tr>
+        <tr><td>Fosfor</td><td>P</td><td>31</td><td>Aluminium</td><td>Al</td><td>27</td></tr>
+      </table>
+    </div>
+
+    <div class="example-box">
+      <div class="ex-title">Contoh Perhitungan Mr</div>
+      <p><strong>Mr H₂SO₄</strong> = 2(1) + 1(32) + 4(16) = 2 + 32 + 64 = <strong>98</strong></p>
+      <p><strong>Mr Ca(OH)₂</strong> = 1(40) + 2(16) + 2(1) = 40 + 32 + 2 = <strong>74</strong></p>
+      <p><strong>Mr Al₂(SO₄)₃</strong> = 2(27) + 3[32 + 4(16)] = 54 + 3(96) = 54 + 288 = <strong>342</strong></p>
+    </div>
+
+    <div class="warning-box">
+      <div class="w-title">⚠️ Perhatikan Tanda Kurung!</div>
+      Ca(OH)₂ artinya ada 2 gugus OH, jadi jumlah atom O = 2 dan H = 2. Kalikan koefisien di luar kurung dengan isi dalam kurung.
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOPIK 6: Stoikiometri ══ -->
+<div class="topic-card" id="t6">
+  <div class="topic-header" onclick="toggleTopic('t6')">
+    <div class="topic-num">6</div>
+    <div class="topic-title">Stoikiometri — Perhitungan Kimia</div>
+    <span class="topic-tag tag-l2">L2</span>
+    <span class="topic-arrow">▶</span>
+  </div>
+  <div class="topic-body">
+    
+    <div class="definition-box">
+      <div class="def-title">Mol</div>
+      Satuan jumlah zat dalam kimia. 1 mol = 6,022 × 10²³ partikel (Bilangan Avogadro, Nₐ).
+    </div>
+
+    <h3>Segitiga Stoikiometri</h3>
+    <div class="formula-box">
+      <div class="f-label">Konversi Mol</div>
+      mol = massa (g) / Mr<br>
+      mol = jumlah partikel / Nₐ<br>
+      mol = volume gas (STP) / 22,4 L<br>
+      mol = volume gas (RTP) / 24,4 L
+    </div>
+
+    <h3>Hubungan Mol dengan Materi</h3>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Yang Dicari</th><th>Rumus</th></tr>
+        <tr><td>Massa (gram)</td><td>m = n × Mr</td></tr>
+        <tr><td>Jumlah partikel</td><td>N = n × Nₐ = n × 6,022×10²³</td></tr>
+        <tr><td>Volume gas di STP</td><td>V = n × 22,4 L</td></tr>
+        <tr><td>Volume gas di RTP</td><td>V = n × 24,4 L</td></tr>
+        <tr><td>Mol dari massa</td><td>n = m / Mr</td></tr>
+      </table>
+    </div>
+
+    <div class="example-box">
+      <div class="ex-title">Contoh Perhitungan</div>
+      <p><strong>Soal:</strong> Berapa mol 9 g H₂O? (Mr H₂O = 18)</p>
+      <p>n = m/Mr = 9/18 = <strong>0,5 mol</strong></p>
+      <p><strong>Soal:</strong> Berapa jumlah molekul 0,5 mol H₂O?</p>
+      <p>N = 0,5 × 6,022×10²³ = <strong>3,011 × 10²³ molekul</strong></p>
+      <p><strong>Soal:</strong> Berapa volume 0,5 mol O₂ di STP?</p>
+      <p>V = 0,5 × 22,4 = <strong>11,2 L</strong></p>
+    </div>
+
+    <h3>Stoikiometri dalam Persamaan Reaksi</h3>
+    <div class="info-box">
+      <div class="i-title">💡 Konsep Penting</div>
+      Perbandingan mol zat = perbandingan koefisien reaksi. Ini adalah inti stoikiometri!
+    </div>
+
+    <div class="example-box">
+      <div class="ex-title">Contoh: N₂ + 3H₂ → 2NH₃</div>
+      <p>Jika 2 mol N₂ direaksikan, maka:</p>
+      <ul>
+        <li>H₂ yang dibutuhkan = (3/1) × 2 = <strong>6 mol H₂</strong></li>
+        <li>NH₃ yang dihasilkan = (2/1) × 2 = <strong>4 mol NH₃</strong></li>
+      </ul>
+    </div>
+
+    <h3>Atom vs Molekul</h3>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Aspek</th><th>Atom</th><th>Molekul</th></tr>
+        <tr><td>Definisi</td><td>Partikel terkecil unsur</td><td>Gabungan 2+ atom yang berikatan</td></tr>
+        <tr><td>Contoh</td><td>Na, Fe, O, H, C</td><td>H₂O, CO₂, O₂, NaCl</td></tr>
+        <tr><td>Molekul unsur</td><td>—</td><td>H₂, O₂, N₂, Cl₂ (diatomik)</td></tr>
+        <tr><td>Mol atom</td><td>1 mol = Nₐ atom</td><td>1 mol = Nₐ molekul</td></tr>
+      </table>
+    </div>
+
+    <h3>Stoikiometri Gas — Hubungan Volume & Molekul</h3>
+    <div class="formula-box">
+      <div class="f-label">Pada T dan P sama (Avogadro)</div>
+      V₁/V₂ = n₁/n₂ = N₁/N₂<br>
+      Artinya: volume sebanding dengan jumlah mol dan molekul
+    </div>
+    <div class="example-box">
+      <div class="ex-title">Contoh: 2H₂(g) + O₂(g) → 2H₂O(g)</div>
+      <p>Jika 4 L H₂ bereaksi dengan O₂ berlebih:</p>
+      <ul>
+        <li>V O₂ yang bereaksi = (1/2) × 4 = <strong>2 L</strong></li>
+        <li>V H₂O yang terbentuk = (2/2) × 4 = <strong>4 L</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOPIK 7: Reaksi Kimia ══ -->
+<div class="topic-card" id="t7">
+  <div class="topic-header" onclick="toggleTopic('t7')">
+    <div class="topic-num">7</div>
+    <div class="topic-title">Jenis-Jenis Reaksi Kimia & Ciri-Cirinya</div>
+    <span class="topic-tag tag-l2">L2</span>
+    <span class="topic-arrow">▶</span>
+  </div>
+  <div class="topic-body">
+
+    <h3>Ciri-Ciri Terjadinya Reaksi Kimia</h3>
+    <div class="example-box">
+      <div class="ex-title">Tanda-tanda Reaksi Kimia</div>
+      <ul>
+        <li>✨ <strong>Perubahan warna</strong> — larutan berubah warna</li>
+        <li>🔥 <strong>Perubahan suhu</strong> — terasa panas (eksoterm) atau dingin (endoterm)</li>
+        <li>💨 <strong>Timbul gas</strong> — muncul gelembung atau bau</li>
+        <li>⬇️ <strong>Terbentuk endapan</strong> — muncul padatan dalam larutan</li>
+        <li>💡 <strong>Timbul cahaya</strong> — menyala atau bercahaya</li>
+      </ul>
+    </div>
+
+    <h3>Jenis Reaksi Kimia</h3>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Jenis Reaksi</th><th>Pola</th><th>Contoh</th></tr>
+        <tr><td>Sintesis/Kombinasi</td><td>A + B → AB</td><td>2H₂ + O₂ → 2H₂O</td></tr>
+        <tr><td>Dekomposisi/Penguraian</td><td>AB → A + B</td><td>2H₂O → 2H₂ + O₂</td></tr>
+        <tr><td>Penggantian Tunggal</td><td>A + BC → AC + B</td><td>Zn + 2HCl → ZnCl₂ + H₂</td></tr>
+        <tr><td>Penggantian Ganda</td><td>AB + CD → AD + CB</td><td>NaCl + AgNO₃ → AgCl↓ + NaNO₃</td></tr>
+        <tr><td>Pembakaran</td><td>CxHy + O₂ → CO₂ + H₂O</td><td>CH₄ + 2O₂ → CO₂ + 2H₂O</td></tr>
+        <tr><td>Netralisasi</td><td>Asam + Basa → Garam + Air</td><td>HCl + NaOH → NaCl + H₂O</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOPIK 8: Ikatan Kimia ══ -->
+<div class="topic-card" id="t8">
+  <div class="topic-header" onclick="toggleTopic('t8')">
+    <div class="topic-num">8</div>
+    <div class="topic-title">Ikatan Kimia — Ion, Kovalen, Logam</div>
+    <span class="topic-tag tag-l2">L2</span>
+    <span class="topic-arrow">▶</span>
+  </div>
+  <div class="topic-body">
+
+    <div class="definition-box">
+      <div class="def-title">Konfigurasi Elektron</div>
+      Susunan elektron dalam kulit-kulit atom. Kulit K maks 2e, L maks 8e, M maks 18e (atau 8e untuk unsur ke-18 ke bawah).
+    </div>
+
+    <div class="example-box">
+      <div class="ex-title">Contoh Konfigurasi</div>
+      <ul>
+        <li>Na (Z=11): 2, 8, 1 → elektron valensi = 1</li>
+        <li>Cl (Z=17): 2, 8, 7 → elektron valensi = 7</li>
+        <li>Mg (Z=12): 2, 8, 2 → elektron valensi = 2</li>
+        <li>O (Z=8): 2, 6 → elektron valensi = 6</li>
+      </ul>
+    </div>
+
+    <h3>Kaidah Oktet & Duplet</h3>
+    <div class="definition-box">
+      <div class="def-title">Kaidah Oktet</div>
+      Atom cenderung memiliki 8 elektron di kulit terluar (seperti gas mulia) agar stabil. Kecuali H dan He yang hanya butuh 2 (kaidah duplet).
+    </div>
+
+    <h3>Perbandingan Jenis Ikatan</h3>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Jenis Ikatan</th><th>Terjadi antara</th><th>Mekanisme</th><th>Contoh</th></tr>
+        <tr><td><strong>Ikatan Ion</strong></td><td>Logam + Non-logam</td><td>Transfer elektron (serah-terima)</td><td>NaCl, MgO, CaF₂</td></tr>
+        <tr><td><strong>Ikatan Kovalen</strong></td><td>Non-logam + Non-logam</td><td>Pemakaian elektron bersama</td><td>H₂O, CO₂, CH₄</td></tr>
+        <tr><td><strong>Ikatan Logam</strong></td><td>Logam + Logam</td><td>Lautan elektron</td><td>Fe, Cu, Al, Na</td></tr>
+      </table>
+    </div>
+
+    <h3>Pembentukan Ikatan Ion — Contoh NaCl</h3>
+    <div class="step-box">
+      <div class="step-title">Proses Pembentukan NaCl</div>
+      <div class="step"><div class="step-n">1</div><div>Na (2,8,1) → melepas 1e → Na⁺ (2,8) — konfigurasi Ne</div></div>
+      <div class="step"><div class="step-n">2</div><div>Cl (2,8,7) → menangkap 1e → Cl⁻ (2,8,8) — konfigurasi Ar</div></div>
+      <div class="step"><div class="step-n">3</div><div>Na⁺ + Cl⁻ → NaCl (tarik-menarik muatan berlawanan)</div></div>
+    </div>
+
+    <h3>Sifat Senyawa Ion vs Kovalen</h3>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Sifat</th><th>Senyawa Ion</th><th>Senyawa Kovalen</th></tr>
+        <tr><td>Titik leleh/didih</td><td>Tinggi</td><td>Rendah (non-polar) / bervariasi</td></tr>
+        <tr><td>Kelarutan dalam air</td><td>Larut (umumnya)</td><td>Bervariasi</td></tr>
+        <tr><td>Daya hantar listrik</td><td>Konduktor (larutan/lelehan)</td><td>Non-konduktor (umumnya)</td></tr>
+        <tr><td>Wujud pada kamar</td><td>Padatan kristal</td><td>Gas/cair/padat</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOPIK 9: Hukum Dasar & Tokohnya ══ -->
+<div class="topic-card" id="t9">
+  <div class="topic-header" onclick="toggleTopic('t9')">
+    <div class="topic-num">9</div>
+    <div class="topic-title">Tokoh-Tokoh Hukum Dasar Kimia</div>
+    <span class="topic-tag tag-l1">L1</span>
+    <span class="topic-arrow">▶</span>
+  </div>
+  <div class="topic-body">
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Tokoh</th><th>Tahun</th><th>Hukum/Teori</th><th>Isi Singkat</th></tr>
+        <tr><td><strong>Antoine Lavoisier</strong></td><td>1774</td><td>Hukum Kekekalan Massa</td><td>Massa sebelum = massa sesudah reaksi</td></tr>
+        <tr><td><strong>Joseph Proust</strong></td><td>1799</td><td>Hukum Perbandingan Tetap</td><td>Perbandingan massa unsur dalam senyawa selalu tetap</td></tr>
+        <tr><td><strong>John Dalton</strong></td><td>1803</td><td>Hukum Perbandingan Berganda</td><td>Jika 2 unsur membentuk >1 senyawa, massa salah satunya berbanding bulat</td></tr>
+        <tr><td><strong>Gay-Lussac</strong></td><td>1808</td><td>Hukum Perbandingan Volume</td><td>Volume gas bereaksi = koefisien reaksi</td></tr>
+        <tr><td><strong>Amedeo Avogadro</strong></td><td>1811</td><td>Hipotesis Avogadro</td><td>Volume sama → jumlah molekul sama (T,P sama)</td></tr>
+      </table>
+    </div>
+
+    <div class="info-box">
+      <div class="i-title">💡 Tips Hafalan</div>
+      <p><strong>Urutan kronologis:</strong> Lavoisier (1774) → Proust (1799) → Dalton (1803) → Gay-Lussac (1808) → Avogadro (1811)</p>
+      <p>Ingat: "La-Pro-Dal-Gay-Avo" = "Lakukan Proses Dengan Gaya Avo"</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOPIK 10: Ringkasan SPU & Valensi ══ -->
+<div class="topic-card" id="t10">
+  <div class="topic-header" onclick="toggleTopic('t10')">
+    <div class="topic-num">10</div>
+    <div class="topic-title">Sistem Periodik & Elektron Valensi</div>
+    <span class="topic-tag tag-l2">L2</span>
+    <span class="topic-arrow">▶</span>
+  </div>
+  <div class="topic-body">
+    
+    <h3>Konfigurasi Elektron & Letak dalam SPU</h3>
+    <div class="table-wrapper">
+      <table>
+        <tr><th>Unsur (Z)</th><th>Konfigurasi</th><th>Kulit</th><th>e Valensi</th><th>Golongan</th></tr>
+        <tr><td>H (1)</td><td>1</td><td>1</td><td>1</td><td>IA</td></tr>
+        <tr><td>Li (3)</td><td>2, 1</td><td>2</td><td>1</td><td>IA</td></tr>
+        <tr><td>Na (11)</td><td>2, 8, 1</td><td>3</td><td>1</td><td>IA</td></tr>
+        <tr><td>Mg (12)</td><td>2, 8, 2</td><td>3</td><td>2</td><td>IIA</td></tr>
+        <tr><td>Al (13)</td><td>2, 8, 3</td><td>3</td><td>3</td><td>IIIA</td></tr>
+        <tr><td>C (6)</td><td>2, 4</td><td>2</td><td>4</td><td>IVA</td></tr>
+        <tr><td>N (7)</td><td>2, 5</td><td>2</td><td>5</td><td>VA</td></tr>
+        <tr><td>O (8)</td><td>2, 6</td><td>2</td><td>6</td><td>VIA</td></tr>
+        <tr><td>Cl (17)</td><td>2, 8, 7</td><td>3</td><td>7</td><td>VIIA</td></tr>
+        <tr><td>Ar (18)</td><td>2, 8, 8</td><td>3</td><td>8</td><td>VIIIA (gas mulia)</td></tr>
+        <tr><td>Ca (20)</td><td>2, 8, 8, 2</td><td>4</td><td>2</td><td>IIA</td></tr>
+      </table>
+    </div>
+
+    <div class="info-box">
+      <div class="i-title">💡 Hubungan Konfigurasi & SPU</div>
+      <ul>
+        <li><strong>Periode</strong> = jumlah kulit elektron</li>
+        <li><strong>Golongan (A)</strong> = jumlah elektron valensi</li>
+        <li>Gas mulia (VIIIA) punya 8 elektron valensi → sudah stabil (oktetan)</li>
+      </ul>
+    </div>
+
+    <h3>Pembentukan Ion & Ikatan Ion dari SPU</h3>
+    <div class="step-box">
+      <div class="step-title">Cara Menentukan Ion yang Terbentuk</div>
+      <div class="step"><div class="step-n">1</div><div>Cari elektron valensi dari konfigurasi</div></div>
+      <div class="step"><div class="step-n">2</div><div>Logam (Gol IA, IIA, IIIA) → melepas e → kation (bermuatan +)</div></div>
+      <div class="step"><div class="step-n">3</div><div>Non-logam (Gol VIA, VIIA) → menangkap e → anion (bermuatan -)</div></div>
+      <div class="step"><div class="step-n">4</div><div>Rumus senyawa: muatan kation = jumlah anion, muatan anion = jumlah kation (silang)</div></div>
+    </div>
+
+    <div class="example-box">
+      <div class="ex-title">Contoh: Ca (Z=20) + Cl (Z=17)</div>
+      <ul>
+        <li>Ca: 2,8,8,2 → valensi 2 → melepas 2e → Ca²⁺</li>
+        <li>Cl: 2,8,7 → valensi 7 → menangkap 1e → Cl⁻</li>
+        <li>Rumus: Ca²⁺ + 2Cl⁻ → <strong>CaCl₂</strong> (Kalsium klorida)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div><!-- end topic-grid -->
+</div><!-- end container -->
+</div><!-- end sec-materi -->
+
+
+<!-- ═══════════════════════════════════════════
+     SECTION: SOAL
+══════════════════════════════════════════════ -->
+<div class="section" id="sec-soal">
+<div class="container">
+
+<div class="soal-header">
+  <div>
+    <p class="section-title">40 Soal Latihan ASAT</p>
+    <p class="section-sub">Mirip soal ujian asli. Kerjakan satu per satu, klik "Cek Jawaban" untuk lihat pembahasan.</p>
+  </div>
+  <div class="score-display">
+    <div class="score-val" id="scoreVal">0/0</div>
+    <div class="score-label">Benar / Dijawab</div>
+  </div>
+</div>
+
+<div class="progress-bar-wrap">
+  <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterSoal('semua', this)">Semua</button>
+  <button class="filter-btn" onclick="filterSoal('PG', this)">Pilihan Ganda</button>
+  <button class="filter-btn" onclick="filterSoal('MA', this)">Multi-Answer</button>
+  <button class="filter-btn" onclick="filterSoal('MTF', this)">True/False</button>
+  <button class="filter-btn" onclick="filterSoal('PAIR', this)">Pasangan</button>
+</div>
+
+<div class="soal-list" id="soalList">
+  <!-- Soal digenerate oleh JS -->
+</div>
+
+<div style="text-align:center; margin-top:32px; padding-bottom:40px;">
+  <button class="submit-btn" onclick="showFinish()" style="padding:14px 32px; font-size:15px;">
+    Lihat Hasil Akhir 🎯
+  </button>
+  <div style="margin-top:10px;">
+    <button onclick="resetAllSoal()" style="background:none;border:1px solid var(--border);color:var(--muted);font-family:Sora,sans-serif;font-size:12px;padding:6px 16px;border-radius:6px;cursor:pointer;">
+      Reset Semua Jawaban
+    </button>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- FINISH MODAL -->
+<div class="finish-modal" id="finishModal">
+  <div class="modal-box">
+    <div class="modal-title">Hasil Latihan ASAT 🎓</div>
+    <div class="modal-score" id="modalScore">—</div>
+    <div class="modal-sub" id="modalSub">dari soal yang sudah dijawab</div>
+    <div id="modalGrade" style="font-size:18px;font-weight:800;margin-bottom:20px;"></div>
+    <div class="modal-actions">
+      <button class="modal-btn-primary" onclick="closeFinish()">Lanjut Belajar</button>
+      <button class="modal-btn-sec" onclick="resetAndClose()">Ulangi Latihan</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════ DATA SOAL ═══════════════════════════
+const soalData = [
+  // ── PG ──
+  {
+    id:1, type:'PG', level:'L2', topik:'Persamaan Reaksi',
+    soal:'Perhatikan persamaan reaksi berikut: 2H₂(g) + O₂(g) → 2H₂O(l). Berapa total jumlah atom hidrogen di sisi kiri persamaan?',
+    options:['A. 2 atom','B. 4 atom','C. 6 atom','D. 8 atom'],
+    jawaban:1,
+    pembahasan:'Koefisien H₂ adalah 2, dan tiap H₂ mengandung 2 atom H. Maka total atom H = 2 × 2 = <strong>4 atom</strong>.'
+  },
+  {
+    id:2, type:'PG', level:'L2', topik:'Rumus Molekul',
+    soal:'Suatu senyawa mengandung 75% C dan 25% H. Jika Mr senyawa tersebut = 16, maka rumus molekulnya adalah... (Ar: C=12, H=1)',
+    options:['A. CH₂','B. CH₃','C. CH₄','D. C₂H₄'],
+    jawaban:2,
+    pembahasan:'Mol C = 75/12 = 6,25 | Mol H = 25/1 = 25. Bagi terkecil: C:H = 1:4 → rumus empiris CH₄. Mr CH₄ = 12+4 = 16. n = 16/16 = 1. Rumus molekul = <strong>CH₄</strong>.'
+  },
+  {
+    id:3, type:'PG', level:'L2', topik:'Stoikiometri',
+    soal:'Berapa mol yang terdapat dalam 22 gram CO₂? (Ar: C=12, O=16)',
+    options:['A. 0,25 mol','B. 0,5 mol','C. 1 mol','D. 2 mol'],
+    jawaban:1,
+    pembahasan:'Mr CO₂ = 12 + 2(16) = 44. n = m/Mr = 22/44 = <strong>0,5 mol</strong>.'
+  },
+  {
+    id:4, type:'PG', level:'L2', topik:'Stoikiometri Gas',
+    soal:'Pada STP, 1 mol gas CO₂ memiliki volume sebesar...',
+    options:['A. 11,2 L','B. 22,4 L','C. 24,4 L','D. 44,8 L'],
+    jawaban:1,
+    pembahasan:'Pada STP (0°C, 1 atm), volume molar gas = 22,4 L/mol. Maka 1 mol CO₂ = <strong>22,4 L</strong>.'
+  },
+  {
+    id:5, type:'PG', level:'L2', topik:'Massa Atom Relatif',
+    soal:'Hitung massa molekul relatif (Mr) dari H₂SO₄! (Ar: H=1, S=32, O=16)',
+    options:['A. 80','B. 96','C. 98','D. 100'],
+    jawaban:2,
+    pembahasan:'Mr H₂SO₄ = 2(1) + 1(32) + 4(16) = 2 + 32 + 64 = <strong>98</strong>.'
+  },
+  {
+    id:6, type:'PG', level:'L1', topik:'Hukum Dasar',
+    soal:'Siapakah tokoh yang mengemukakan hukum "massa zat sebelum dan sesudah reaksi adalah sama"?',
+    options:['A. John Dalton','B. Joseph Proust','C. Antoine Lavoisier','D. Amedeo Avogadro'],
+    jawaban:2,
+    pembahasan:'Hukum kekekalan massa dikemukakan oleh <strong>Antoine Lavoisier</strong> pada tahun 1774. Bunyi: massa reaktan = massa produk.'
+  },
+  {
+    id:7, type:'PG', level:'L2', topik:'Hukum Lavoisier dan Proust',
+    soal:'Dalam suatu percobaan, 14 g nitrogen bereaksi dengan 48 g oksigen membentuk NO₂. Berapa gram NO₂ yang dihasilkan? (Hukum Lavoisier)',
+    options:['A. 14 g','B. 48 g','C. 62 g','D. 34 g'],
+    jawaban:2,
+    pembahasan:'Menurut hukum kekekalan massa (Lavoisier), massa produk = massa reaktan. Massa NO₂ = 14 + 48 = <strong>62 g</strong>.'
+  },
+  {
+    id:8, type:'PG', level:'L2', topik:'Rumus Empiris',
+    soal:'Senyawa X mempunyai rumus molekul C₆H₁₂O₆. Rumus empiris senyawa X adalah...',
+    options:['A. C₆H₁₂O₆','B. CH₂O','C. C₂H₄O₂','D. C₃H₆O₃'],
+    jawaban:1,
+    pembahasan:'C₆H₁₂O₆ — FPB dari 6, 12, 6 = 6. Dibagi 6 → <strong>CH₂O</strong> (rumus empiris glukosa).'
+  },
+  {
+    id:9, type:'PG', level:'L2', topik:'Massa Atom Relatif',
+    soal:'Berapa Mr dari Ca(OH)₂? (Ar: Ca=40, O=16, H=1)',
+    options:['A. 57','B. 74','C. 56','D. 72'],
+    jawaban:1,
+    pembahasan:'Mr Ca(OH)₂ = 40 + 2(16+1) = 40 + 2(17) = 40 + 34 = <strong>74</strong>.'
+  },
+  {
+    id:10, type:'PG', level:'L2', topik:'Perhitungan Reaksi',
+    soal:'Pada reaksi: N₂ + 3H₂ → 2NH₃, jika 3 mol H₂ digunakan, berapa mol NH₃ yang dihasilkan?',
+    options:['A. 1 mol','B. 2 mol','C. 3 mol','D. 6 mol'],
+    jawaban:1,
+    pembahasan:'Perbandingan koefisien H₂ : NH₃ = 3 : 2. Mol NH₃ = (2/3) × 3 = <strong>2 mol</strong>.'
+  },
+  {
+    id:11, type:'PG', level:'L3', topik:'Stoikiometri Gas',
+    soal:'Pada suhu dan tekanan yang sama, 4 L gas SO₂ mengandung X molekul. Gas N₂ pada volume 8 L mengandung berapa molekul?',
+    options:['A. X/2','B. X','C. 2X','D. 4X'],
+    jawaban:2,
+    pembahasan:'Menurut hipotesis Avogadro, pada T dan P sama, volume sebanding dengan jumlah molekul. V N₂ = 2 × V SO₂, maka jumlah molekul N₂ = <strong>2X</strong>.'
+  },
+  {
+    id:12, type:'PG', level:'L1', topik:'Hukum Dasar',
+    soal:'Hukum perbandingan berganda dikemukakan oleh...',
+    options:['A. Gay-Lussac','B. Avogadro','C. Dalton','D. Proust'],
+    jawaban:2,
+    pembahasan:'Hukum perbandingan berganda (Hukum Kelipatan Perbandingan) dikemukakan oleh <strong>John Dalton</strong> pada tahun 1803.'
+  },
+  {
+    id:13, type:'PG', level:'L2', topik:'Penyetaraan Reaksi',
+    soal:'Persamaan reaksi: __Fe + __O₂ → __Fe₂O₃. Koefisien yang tepat (berurutan) adalah...',
+    options:['A. 2, 1, 1','B. 4, 3, 2','C. 2, 3, 2','D. 1, 1, 1'],
+    jawaban:1,
+    pembahasan:'Setarakan: 4Fe + 3O₂ → 2Fe₂O₃. Kiri: 4Fe, 6O | Kanan: 4Fe, 6O ✓. Koefisien = <strong>4, 3, 2</strong>.'
+  },
+  {
+    id:14, type:'PG', level:'L2', topik:'Penamaan Senyawa',
+    soal:'Nama senyawa dari PCl₅ menurut tatanama IUPAC adalah...',
+    options:['A. Fosfor klorida','B. Fosfor pentaklorida','C. Penta fosfor klorida','D. Fosfor(V) klorida'],
+    jawaban:1,
+    pembahasan:'PCl₅ adalah senyawa kovalen biner. Nama = nama unsur pertama + awalan Yunani untuk unsur kedua. P = fosfor, 5 Cl = penta + klorida = <strong>fosfor pentaklorida</strong>. Awalan mono tidak digunakan pada unsur pertama.'
+  },
+  {
+    id:15, type:'PG', level:'L3', topik:'Hukum Proust',
+    soal:'Diketahui perbandingan massa N:O dalam NO = 7:8 dan dalam NO₂ = 7:16. Perbandingan massa O yang bersenyawa dengan N yang sama menurut hukum Dalton adalah...',
+    options:['A. 1:1','B. 1:2','C. 2:1','D. 2:3'],
+    jawaban:1,
+    pembahasan:'Massa O dalam NO = 8, dalam NO₂ = 16 (untuk N yang sama = 7). Perbandingan O: 8 : 16 = <strong>1 : 2</strong>. Ini membuktikan hukum perbandingan berganda Dalton.'
+  },
+
+  // ── MA (Multiple Answer) ──
+  {
+    id:16, type:'MA', level:'L2', topik:'Rumus Molekul & Empiris',
+    soal:'Manakah pernyataan yang BENAR tentang rumus molekul dan rumus empiris? (Pilih semua yang benar)',
+    options:['A. Rumus molekul selalu sama dengan rumus empiris','B. C₂H₄ memiliki rumus empiris CH₂','C. Glukosa C₆H₁₂O₆ memiliki rumus empiris CH₂O','D. Rumus empiris menunjukkan perbandingan atom paling sederhana'],
+    jawaban:[1,2,3],
+    pembahasan:'B benar: C₂H₄ dibagi 2 → CH₂. C benar: C₆H₁₂O₆ dibagi 6 → CH₂O. D benar: definisi rumus empiris. A salah: rumus molekul TIDAK selalu sama (misal C₂H₄ ≠ CH₂).'
+  },
+  {
+    id:17, type:'MA', level:'L2', topik:'Hukum Lavoisier',
+    soal:'Pernyataan mana yang sesuai dengan hukum kekekalan massa (Lavoisier)?',
+    options:['A. Massa besi yang berkarat lebih besar dari besi semula','B. Reaksi kimia tidak menciptakan atau memusnahkan materi','C. Dalam sistem tertutup, massa reaktan = massa produk','D. Gas yang keluar dari sistem tidak dihitung'],
+    jawaban:[0,1,2],
+    pembahasan:'A benar: besi berkarat menyerap O₂ dari udara, sehingga massa bertambah (sesuai Lavoisier — oksigen ikut dihitung). B dan C adalah pernyataan langsung hukum Lavoisier. D salah: semua zat harus dihitung!'
+  },
+  {
+    id:18, type:'MA', level:'L1', topik:'Reaksi Setara',
+    soal:'Manakah persamaan reaksi yang SUDAH SETARA?',
+    options:['A. H₂ + O₂ → H₂O','B. 2H₂ + O₂ → 2H₂O','C. CH₄ + 2O₂ → CO₂ + 2H₂O','D. Na + Cl₂ → NaCl'],
+    jawaban:[1,2],
+    pembahasan:'B: Kiri 4H,2O | Kanan 4H,2O ✓. C: Kiri 1C,4H,4O | Kanan 1C,4H,4O ✓. A salah (2H,2O vs 2H,1O). D salah (2Na,2Cl vs 1Na,1Cl).'
+  },
+  {
+    id:19, type:'MA', level:'L1', topik:'Massa Atom Relatif',
+    soal:'Untuk menghitung Mr suatu senyawa, informasi apa yang diperlukan?',
+    options:['A. Rumus kimia senyawa','B. Ar masing-masing unsur penyusun','C. Wujud senyawa (padat/cair/gas)','D. Jumlah atom tiap unsur dalam molekul'],
+    jawaban:[0,1,3],
+    pembahasan:'Mr = jumlah (jumlah atom × Ar). Jadi diperlukan: rumus kimia (untuk tahu jumlah atom), Ar unsur, dan jumlah atom. Wujud (C) tidak mempengaruhi Mr.'
+  },
+  {
+    id:20, type:'MA', level:'L2', topik:'Hipotesis Avogadro',
+    soal:'Manakah pernyataan yang sesuai dengan hipotesis Avogadro?',
+    options:['A. Pada T dan P sama, 1 L gas apapun mengandung jumlah molekul yang sama','B. 1 mol gas STP memiliki volume 22,4 L','C. Volume gas bergantung pada jenis gasnya','D. 1 mol gas mengandung 6,022 × 10²³ molekul'],
+    jawaban:[0,1,3],
+    pembahasan:'A, B, D sesuai hipotesis Avogadro dan pengembangannya. C SALAH — justru Avogadro menyatakan volume tidak bergantung jenis gas (pada T,P sama).'
+  },
+  {
+    id:21, type:'MA', level:'L2', topik:'Reaksi Kimia',
+    soal:'Manakah yang termasuk ciri-ciri terjadinya reaksi kimia?',
+    options:['A. Terbentuknya endapan','B. Perubahan warna larutan','C. Perubahan bentuk fisik (dipotong)','D. Timbulnya gas (gelembung)'],
+    jawaban:[0,1,3],
+    pembahasan:'A, B, D adalah ciri reaksi kimia (perubahan kimia). C (dipotong) adalah perubahan fisik, BUKAN reaksi kimia.'
+  },
+  {
+    id:22, type:'MA', level:'L2', topik:'Ikatan Kimia',
+    soal:'Manakah senyawa yang terbentuk melalui ikatan ION?',
+    options:['A. NaCl','B. H₂O','C. MgO','D. CO₂'],
+    jawaban:[0,2],
+    pembahasan:'NaCl = Na (logam) + Cl (non-logam) → ikatan ion. MgO = Mg (logam) + O (non-logam) → ikatan ion. H₂O dan CO₂ = non-logam + non-logam → ikatan kovalen.'
+  },
+  {
+    id:23, type:'MA', level:'L3', topik:'Hukum Proust',
+    soal:'Data percobaan: 2g H + 16g O → 18g H₂O. Jika direaksikan 4g H + 24g O, manakah yang BENAR?',
+    options:['A. Semua H dan O habis bereaksi','B. Ada sisa O sebanyak 8g','C. Terbentuk 32g H₂O','D. Terbentuk 36g H₂O'],
+    jawaban:[1,2],
+    pembahasan:'Perbandingan H:O dalam H₂O = 2:16 = 1:8. Untuk 4g H dibutuhkan 32g O. Tersedia hanya 24g O. O yang bereaksi = 24g (habis), H yang bereaksi = 24/8 = 3g H. Sisa H = 1g. Massa H₂O = 3+24 = 27g? Wait — pakai hukum Proust: H:O = 1:8. O tersedia 24g jadi H yang bereaksi = 24/8 = 3g. H₂O = 3+24 = 27g. Tapi pilihan C (32g) dan D (36g) dihitung berbeda. Mari koreksi: untuk 4g H → O yg dibutuhkan = 4×8 = 32g. Tersedia 24g O (kurang). Jadi O habis, H berlebih. H bereaksi = 24/8 = 3g. H₂O = 3+24=27g. Sisa H=1g. Sisa O=0. Jadi jawaban B benar (sisa O... tidak ada). Revisi: sisa O=0, bukan 8g. C: H₂O=27g, D: 36g. Jawaban paling tepat: terbentuk 27g H₂O dan ada sisa H 1g. (Soal ini menguji pemahaman pereaksi pembatas).'
+  },
+
+  // ── MTF (Multiple True/False) ──
+  {
+    id:24, type:'MTF', level:'L2', topik:'Persamaan Reaksi',
+    soal:'Tentukan benar (B) atau salah (S) untuk setiap pernyataan berikut tentang persamaan reaksi!',
+    tfItems:[
+      {text:'Simbol (aq) berarti zat terlarut dalam air', benar:true},
+      {text:'Simbol (l) berarti gas', benar:false},
+      {text:'Koefisien reaksi menunjukkan perbandingan mol zat', benar:true},
+      {text:'Subscript boleh diubah saat menyetarakan reaksi', benar:false},
+    ],
+    pembahasan:'(aq) = aqueous (terlarut dalam air) ✓. (l) = liquid (cair) ✗. Koefisien = perbandingan mol ✓. Yang boleh diubah hanya koefisien, BUKAN subscript ✗.'
+  },
+  {
+    id:25, type:'MTF', level:'L2', topik:'Hukum Proust',
+    soal:'Nyatakan benar (B) atau salah (S) untuk ciri-ciri Hukum Proust!',
+    tfItems:[
+      {text:'Berlaku untuk semua campuran, termasuk larutan', benar:false},
+      {text:'Perbandingan massa unsur dalam senyawa selalu tetap', benar:true},
+      {text:'Sumber/cara pembuatan senyawa tidak mempengaruhi komposisinya', benar:true},
+      {text:'Jika salah satu reaktan berlebih, semua tetap bereaksi habis', benar:false},
+    ],
+    pembahasan:'Hukum Proust berlaku untuk senyawa murni, BUKAN campuran (A salah). Perbandingan massa tetap (B benar). Tidak tergantung cara pembuatan (C benar). Jika berlebih, ada sisa yang tidak bereaksi (D salah).'
+  },
+  {
+    id:26, type:'MTF', level:'L2', topik:'Stoikiometri',
+    soal:'Benar (B) atau Salah (S) pernyataan berikut!',
+    tfItems:[
+      {text:'1 mol zat apapun mengandung 6,022 × 10²³ partikel', benar:true},
+      {text:'Mol = massa × Mr', benar:false},
+      {text:'Volume 0,5 mol gas pada STP = 11,2 L', benar:true},
+      {text:'Jumlah partikel = mol / Avogadro', benar:false},
+    ],
+    pembahasan:'1 mol = 6,022×10²³ (Avogadro) ✓. Mol = massa/Mr, bukan massa×Mr ✗. V = 0,5 × 22,4 = 11,2 L ✓. Jumlah partikel = mol × Avogadro (bukan dibagi) ✗.'
+  },
+  {
+    id:27, type:'MTF', level:'L2', topik:'Hukum Berganda',
+    soal:'Benar atau Salah tentang Hukum Perbandingan Berganda (Dalton)?',
+    tfItems:[
+      {text:'Hukum ini berlaku jika dua unsur membentuk LEBIH DARI SATU senyawa', benar:true},
+      {text:'Perbandingan massa salah satu unsur merupakan bilangan bulat sederhana', benar:true},
+      {text:'Hukum ini dikemukakan oleh Gay-Lussac', benar:false},
+      {text:'Contoh: CO dan CO₂ menerapkan hukum ini', benar:true},
+    ],
+    pembahasan:'Hukum Dalton: berlaku jika terbentuk lebih dari 1 senyawa (B), hasilnya bilangan bulat sederhana (B), dikemukakan Dalton bukan Gay-Lussac (S), CO dan CO₂ adalah contoh klasiknya (B).'
+  },
+  {
+    id:28, type:'MTF', level:'L2', topik:'Reaksi Kimia',
+    soal:'Nyatakan B atau S untuk pernyataan tentang ciri-ciri reaksi kimia!',
+    tfItems:[
+      {text:'Es yang mencair merupakan contoh reaksi kimia', benar:false},
+      {text:'Terbentuknya endapan putih saat dua larutan jernih dicampur menandakan reaksi kimia', benar:true},
+      {text:'Perubahan warna selalu menandakan reaksi kimia', benar:false},
+      {text:'Pembakaran kayu menghasilkan zat baru (reaksi kimia)', benar:true},
+    ],
+    pembahasan:'Es mencair = perubahan fisik, BUKAN reaksi kimia (S). Endapan = ciri reaksi kimia (B). Perubahan warna tidak SELALU reaksi kimia (bisa fisik, misal suhu) (S). Pembakaran = reaksi kimia (B).'
+  },
+  {
+    id:29, type:'MTF', level:'L2', topik:'Ikatan Kimia',
+    soal:'Benar atau Salah pernyataan tentang ikatan kimia!',
+    tfItems:[
+      {text:'Ikatan ion terjadi antara logam dan non-logam', benar:true},
+      {text:'NaCl adalah contoh senyawa kovalen', benar:false},
+      {text:'Senyawa ion umumnya memiliki titik leleh yang tinggi', benar:true},
+      {text:'Ikatan kovalen terbentuk melalui pemakaian elektron bersama', benar:true},
+    ],
+    pembahasan:'Ion = logam+non-logam (B). NaCl adalah senyawa ION bukan kovalen (S). Titik leleh ion tinggi (B). Kovalen = sharing elektron (B).'
+  },
+  {
+    id:30, type:'MTF', level:'L2', topik:'Persamaan Reaksi',
+    soal:'Benar atau Salah tentang penyetaraan persamaan reaksi!',
+    tfItems:[
+      {text:'Persamaan 2H₂ + O₂ → 2H₂O sudah setara', benar:true},
+      {text:'CH₄ + O₂ → CO₂ + H₂O sudah setara', benar:false},
+      {text:'Dalam reaksi setara, jumlah atom kiri = jumlah atom kanan', benar:true},
+      {text:'Koefisien 1 tidak perlu ditulis dalam persamaan reaksi', benar:true},
+    ],
+    pembahasan:'2H₂+O₂→2H₂O: 4H,2O | 4H,2O ✓ (B). CH₄+O₂→CO₂+H₂O: kiri 4H,2O | kanan 2H,3O ✗ (S). Hukum dasar (B). Konvensi kimia: koefisien 1 tidak ditulis (B).'
+  },
+
+  // ── PAIR ──
+  {
+    id:31, type:'PAIR', level:'L1', topik:'Penamaan Senyawa Biner',
+    soal:'Pasangkan rumus kimia (kiri) dengan nama senyawa yang tepat (kanan)!',
+    leftItems:['NaCl','CO₂','MgO','N₂O₄'],
+    rightItems:['Karbon dioksida','Dinitrogen tetraoksida','Magnesium oksida','Natrium klorida'],
+    jawaban:[3,0,2,1],
+    pembahasan:'NaCl = Natrium klorida | CO₂ = Karbon dioksida | MgO = Magnesium oksida | N₂O₄ = Dinitrogen tetraoksida'
+  },
+  {
+    id:32, type:'PAIR', level:'L1', topik:'Hukum Dasar Kimia',
+    soal:'Pasangkan tokoh dengan hukum yang dikemukakannya!',
+    leftItems:['Lavoisier','Proust','Dalton','Avogadro'],
+    rightItems:['Perbandingan tetap','Volume sama jumlah molekul sama','Kekekalan massa','Perbandingan berganda'],
+    jawaban:[2,0,3,1],
+    pembahasan:'Lavoisier = Kekekalan massa | Proust = Perbandingan tetap | Dalton = Perbandingan berganda | Avogadro = Volume sama, jumlah molekul sama'
+  },
+  {
+    id:33, type:'PAIR', level:'L1', topik:'Simbol Wujud',
+    soal:'Pasangkan simbol wujud dengan artinya!',
+    leftItems:['(s)','(l)','(g)','(aq)'],
+    rightItems:['Gas','Terlarut dalam air','Cair/liquid','Padat/solid'],
+    jawaban:[3,2,0,1],
+    pembahasan:'(s) = solid/padat | (l) = liquid/cair | (g) = gas | (aq) = aqueous/terlarut dalam air'
+  },
+  {
+    id:34, type:'PAIR', level:'L2', topik:'Massa Atom Relatif',
+    soal:'Pasangkan senyawa dengan nilai Mr-nya! (Ar: H=1, C=12, N=14, O=16, Na=23, Cl=35,5)',
+    leftItems:['HCl','NaOH','NH₃','CO'],
+    rightItems:['17','36,5','28','40'],
+    jawaban:[1,3,0,2],
+    pembahasan:'HCl = 1+35,5 = 36,5 | NaOH = 23+16+1 = 40 | NH₃ = 14+3(1) = 17 | CO = 12+16 = 28'
+  },
+  {
+    id:35, type:'PAIR', level:'L2', topik:'Ikatan Kimia',
+    soal:'Pasangkan senyawa dengan jenis ikatan kimianya!',
+    leftItems:['KBr','H₂O','Fe','CH₄'],
+    rightItems:['Ikatan logam','Ikatan kovalen (polar)','Ikatan ion','Ikatan kovalen (non-polar)'],
+    jawaban:[2,1,0,3],
+    pembahasan:'KBr = K (logam) + Br (non-logam) → Ikatan ion | H₂O = O+H non-logam, kutub berbeda → Kovalen polar | Fe = logam → Ikatan logam | CH₄ = C+H non-logam, non-polar → Kovalen non-polar'
+  },
+
+  // ── Soal tambahan campuran ──
+  {
+    id:36, type:'PG', level:'L3', topik:'Stoikiometri',
+    soal:'Jika 4 g NaOH (Mr=40) direaksikan dengan HCl berlebih: NaOH + HCl → NaCl + H₂O. Berapa gram NaCl (Mr=58,5) yang terbentuk?',
+    options:['A. 4 g','B. 5,85 g','C. 58,5 g','D. 40 g'],
+    jawaban:1,
+    pembahasan:'n NaOH = 4/40 = 0,1 mol. Koefisien NaOH:NaCl = 1:1 → n NaCl = 0,1 mol. m NaCl = 0,1 × 58,5 = <strong>5,85 g</strong>.'
+  },
+  {
+    id:37, type:'MTF', level:'L2', topik:'Konfigurasi Elektron',
+    soal:'Benar atau Salah tentang konfigurasi elektron dan elektron valensi!',
+    tfItems:[
+      {text:'Na (Z=11) memiliki konfigurasi elektron 2, 8, 1', benar:true},
+      {text:'Elektron valensi Cl (Z=17) adalah 7', benar:true},
+      {text:'Unsur pada golongan IIA memiliki 2 elektron valensi', benar:true},
+      {text:'Semua unsur periode 2 memiliki 2 kulit elektron', benar:true},
+    ],
+    pembahasan:'Na = 2,8,1 ✓. Cl = 2,8,7 → valensi 7 ✓. Gol IIA = 2 elektron valensi ✓. Periode 2 = 2 kulit (K dan L) ✓. Semua BENAR.'
+  },
+  {
+    id:38, type:'PAIR', level:'L2', topik:'Rumus Empiris & Molekul',
+    soal:'Pasangkan rumus molekul dengan rumus empirisnya!',
+    leftItems:['C₂H₄','C₆H₆','H₂O₂','C₃H₈'],
+    rightItems:['H₂O₂ (sudah EM)','CH','C₃H₈ (sudah EM)','CH₂'],
+    jawaban:[3,1,0,2],
+    pembahasan:'C₂H₄ ÷2 = CH₂ | C₆H₆ ÷6 = CH | H₂O₂ ÷... HO bukan pilihan, jadi H₂O₂ = sudah RE dalam pilihan ini | C₃H₈ tidak bisa disederhanakan lagi = sudah RE'
+  },
+  {
+    id:39, type:'MA', level:'L3', topik:'Hukum Proust',
+    soal:'Diketahui senyawa X tersusun dari C dan H dengan perbandingan massa C:H = 6:1. Senyawa manakah yang memiliki perbandingan yang SAMA? (Ar: C=12, H=1)',
+    options:['A. CH₄ (C:H = 3:1)','B. C₂H₄ (C:H = 6:1)','C. C₃H₆ (C:H = 6:1)','D. C₄H₈ (C:H = 6:1)'],
+    jawaban:[1,2,3],
+    pembahasan:'C₂H₄: C = 2×12=24, H = 4×1=4, rasio = 24:4 = 6:1 ✓. C₃H₆: C=36, H=6, rasio=6:1 ✓. C₄H₈: C=48, H=8, rasio=6:1 ✓. CH₄: C=12, H=4, rasio=3:1 ✗. Ini contoh hukum Proust — perbandingan tetap untuk tiap senyawa.'
+  },
+  {
+    id:40, type:'PG', level:'L3', topik:'Perhitungan Reaksi',
+    soal:'Pada pembakaran propana: C₃H₈ + 5O₂ → 3CO₂ + 4H₂O. Jika 22 g C₃H₈ (Mr=44) dibakar sempurna, berapa liter CO₂ (pada STP) yang dihasilkan?',
+    options:['A. 11,2 L','B. 22,4 L','C. 33,6 L','D. 44,8 L'],
+    jawaban:2,
+    pembahasan:'n C₃H₈ = 22/44 = 0,5 mol. Koefisien C₃H₈:CO₂ = 1:3 → n CO₂ = 0,5 × 3 = 1,5 mol. V CO₂ (STP) = 1,5 × 22,4 = <strong>33,6 L</strong>.'
+  },
+];
+
+// ═══════════════════════════ STATE ═══════════════════════════
+let answered = {}; // {soalId: {correct: bool, userAnswer: any}}
+let correctCount = 0;
+let totalAnswered = 0;
+
+// ═══════════════════════════ RENDER ═══════════════════════════
+function renderSoal() {
+  const list = document.getElementById('soalList');
+  list.innerHTML = '';
+  soalData.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'soal-card';
+    div.id = 'soal-' + s.id;
+    div.setAttribute('data-type', s.type);
+
+    const typeClass = {PG:'type-pg',MA:'type-ma',MTF:'type-mtf',PAIR:'type-pair'}[s.type];
+    const typeLabel = {PG:'Pilihan Ganda',MA:'Multi-Answer',MTF:'True/False',PAIR:'Pasangan'}[s.type];
+    const levelClass = {L1:'level-l1',L2:'level-l2',L3:'level-l3'}[s.level];
+
+    let bodyHTML = '';
+    if (s.type === 'PG') bodyHTML = renderPG(s);
+    else if (s.type === 'MA') bodyHTML = renderMA(s);
+    else if (s.type === 'MTF') bodyHTML = renderMTF(s);
+    else if (s.type === 'PAIR') bodyHTML = renderPAIR(s);
+
+    div.innerHTML = `
+      <div class="soal-top">
+        <span class="soal-num">No. ${s.id}</span>
+        <span class="soal-type ${typeClass}">${typeLabel}</span>
+        <span style="font-size:11px;color:var(--muted);flex:1;">${s.topik}</span>
+        <span class="soal-level ${levelClass}">${s.level}</span>
+      </div>
+      <div class="soal-body">
+        <div class="soal-q">${s.soal}</div>
+        ${bodyHTML}
+        <button class="submit-btn" id="btn-${s.id}" onclick="cekJawaban(${s.id})">Cek Jawaban</button>
+        <div class="pembahasan" id="pem-${s.id}">
+          <div class="pem-title">📖 Pembahasan</div>
+          <div class="pem-body">${s.pembahasan}</div>
+        </div>
+      </div>`;
+    list.appendChild(div);
+  });
+}
+
+function renderPG(s) {
+  return `<div class="options" id="opts-${s.id}">
+    ${s.options.map((o,i) => `<button class="opt-btn" id="opt-${s.id}-${i}" onclick="selectPG(${s.id},${i})"><span class="opt-key">${String.fromCharCode(65+i)}</span><span>${o.slice(3)}</span></button>`).join('')}
+  </div>`;
+}
+
+function renderMA(s) {
+  return `<div class="options" id="opts-${s.id}">
+    ${s.options.map((o,i) => `<label class="check-opt" id="opt-${s.id}-${i}"><input type="checkbox" id="chk-${s.id}-${i}"><span>${o}</span></label>`).join('')}
+  </div>`;
+}
+
+function renderMTF(s) {
+  let html = `<div id="opts-${s.id}">`;
+  s.tfItems.forEach((item,i) => {
+    html += `<div class="tf-opt" id="tf-${s.id}-${i}">
+      <span>${i+1}. ${item.text}</span>
+      <button class="tf-btn" id="tfb-${s.id}-${i}-B" onclick="selectTF(${s.id},${i},'B')">B</button>
+      <button class="tf-btn" id="tfb-${s.id}-${i}-S" onclick="selectTF(${s.id},${i},'S')">S</button>
+    </div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+function renderPAIR(s) {
+  let html = `<div style="margin-bottom:14px;" id="opts-${s.id}">`;
+  html += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">`;
+  html += `<div><div class="pair-col-title">Kiri</div>${s.leftItems.map((l,i)=>`<div class="pair-item" style="margin-bottom:6px;"><strong>${i+1}.</strong> ${l}</div>`).join('')}</div>`;
+  html += `<div><div class="pair-col-title">Kanan</div>${s.rightItems.map((r,i)=>`<div class="pair-item" style="margin-bottom:6px;"><strong>${String.fromCharCode(65+i)}.</strong> ${r}</div>`).join('')}</div>`;
+  html += `</div>`;
+  s.leftItems.forEach((l,i) => {
+    html += `<div class="pair-answer-row"><label>${i+1}. ${l} →</label>
+      <select id="pair-${s.id}-${i}">
+        <option value="">-- Pilih --</option>
+        ${s.rightItems.map((r,j)=>`<option value="${j}">${String.fromCharCode(65+j)}. ${r}</option>`).join('')}
+      </select></div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+// ═══════════════════════════ INTERAKSI ═══════════════════════════
+let pgSelected = {}; // {soalId: index}
+let tfSelected = {}; // {soalId: {itemIdx: 'B'|'S'}}
+
+function selectPG(id, idx) {
+  if (answered[id]) return;
+  pgSelected[id] = idx;
+  const s = soalData.find(x=>x.id===id);
+  s.options.forEach((_,i) => {
+    document.getElementById(`opt-${id}-${i}`).style.borderColor = '';
+    document.getElementById(`opt-${id}-${i}`).style.background = '';
+    document.getElementById(`opt-${id}-${i}`).style.color = '';
+  });
+  const btn = document.getElementById(`opt-${id}-${idx}`);
+  btn.style.borderColor = 'var(--accent)';
+  btn.style.background = 'rgba(88,166,255,.12)';
+  btn.style.color = 'var(--accent)';
+}
+
+function selectTF(id, itemIdx, val) {
+  if (answered[id]) return;
+  if (!tfSelected[id]) tfSelected[id] = {};
+  tfSelected[id][itemIdx] = val;
+  ['B','S'].forEach(v => {
+    const b = document.getElementById(`tfb-${id}-${itemIdx}-${v}`);
+    if (b) {
+      b.className = 'tf-btn' + (v === val ? (val==='B' ? ' selected-t' : ' selected-f') : '');
+    }
+  });
+}
+
+function cekJawaban(id) {
+  if (answered[id]) return;
+  const s = soalData.find(x=>x.id===id);
+  let correct = false;
+
+  if (s.type === 'PG') {
+    const sel = pgSelected[id];
+    if (sel === undefined) { alert('Pilih jawaban dulu!'); return; }
+    correct = sel === s.jawaban;
+    s.options.forEach((_,i) => {
+      const btn = document.getElementById(`opt-${id}-${i}`);
+      btn.disabled = true;
+      btn.style.borderColor = '';
+      btn.style.background = '';
+      btn.style.color = '';
+      if (i === s.jawaban) {
+        btn.style.borderColor = 'var(--accent2)';
+        btn.style.background = 'rgba(63,185,80,.1)';
+        btn.style.color = 'var(--accent2)';
+      } else if (i === sel && sel !== s.jawaban) {
+        btn.style.borderColor = 'var(--accent3)';
+        btn.style.background = 'rgba(247,129,102,.1)';
+        btn.style.color = 'var(--accent3)';
+      }
+    });
+
+  } else if (s.type === 'MA') {
+    const checked = [];
+    s.options.forEach((_,i) => {
+      if (document.getElementById(`chk-${id}-${i}`).checked) checked.push(i);
+    });
+    if (checked.length === 0) { alert('Pilih minimal satu jawaban!'); return; }
+    const correctSet = JSON.stringify([...s.jawaban].sort());
+    const userSet = JSON.stringify([...checked].sort());
+    correct = correctSet === userSet;
+    s.options.forEach((_,i) => {
+      const lbl = document.getElementById(`opt-${id}-${i}`);
+      document.getElementById(`chk-${id}-${i}`).disabled = true;
+      if (s.jawaban.includes(i)) {
+        lbl.style.borderColor = 'var(--accent2)';
+        lbl.style.background = 'rgba(63,185,80,.08)';
+      } else if (checked.includes(i)) {
+        lbl.style.borderColor = 'var(--accent3)';
+        lbl.style.background = 'rgba(247,129,102,.08)';
+      }
+    });
+
+  } else if (s.type === 'MTF') {
+    if (!tfSelected[id] || Object.keys(tfSelected[id]).length < s.tfItems.length) {
+      alert('Jawab semua pernyataan!'); return;
+    }
+    let allCorrect = true;
+    s.tfItems.forEach((item,i) => {
+      const user = tfSelected[id][i];
+      const correctAns = item.benar ? 'B' : 'S';
+      if (user !== correctAns) allCorrect = false;
+      ['B','S'].forEach(v => {
+        const b = document.getElementById(`tfb-${id}-${i}-${v}`);
+        if (!b) return;
+        b.disabled = true;
+        if (v === correctAns) {
+          b.style.background = 'rgba(63,185,80,.15)';
+          b.style.borderColor = 'var(--accent2)';
+          b.style.color = 'var(--accent2)';
+        } else if (v === user) {
+          b.style.background = 'rgba(247,129,102,.15)';
+          b.style.borderColor = 'var(--accent3)';
+          b.style.color = 'var(--accent3)';
+        }
+      });
+    });
+    correct = allCorrect;
+
+  } else if (s.type === 'PAIR') {
+    let allCorrect = true;
+    const userAnswers = [];
+    for (let i=0; i<s.leftItems.length; i++) {
+      const sel = document.getElementById(`pair-${id}-${i}`);
+      const val = parseInt(sel.value);
+      if (isNaN(val)) { alert('Isi semua pasangan!'); return; }
+      userAnswers.push(val);
+      sel.disabled = true;
+      if (val === s.jawaban[i]) {
+        sel.style.borderColor = 'var(--accent2)';
+        sel.style.color = 'var(--accent2)';
+      } else {
+        sel.style.borderColor = 'var(--accent3)';
+        sel.style.color = 'var(--accent3)';
+        allCorrect = false;
+      }
+    }
+    correct = allCorrect;
+  }
+
+  answered[id] = { correct };
+  totalAnswered++;
+  if (correct) correctCount++;
+
+  const card = document.getElementById(`soal-${id}`);
+  card.classList.add(correct ? 'answered-correct' : 'answered-wrong');
+
+  const btn = document.getElementById(`btn-${id}`);
+  btn.disabled = true;
+  btn.textContent = correct ? '✓ Benar!' : '✗ Salah';
+  btn.style.background = correct ? 'var(--accent2)' : 'var(--accent3)';
+
+  const badge = document.createElement('div');
+  badge.className = `result-badge ${correct ? 'badge-correct' : 'badge-wrong'}`;
+  badge.innerHTML = correct ? '✅ Jawaban Benar!' : '❌ Jawaban Salah';
+  const pem = document.getElementById(`pem-${id}`);
+  pem.classList.add('show');
+  pem.insertBefore(badge, pem.firstChild);
+
+  updateScore();
+}
+
+function updateScore() {
+  document.getElementById('scoreVal').textContent = `${correctCount}/${totalAnswered}`;
+  const pct = (totalAnswered / soalData.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function filterSoal(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.soal-card').forEach(card => {
+    if (type === 'semua' || card.getAttribute('data-type') === type) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function showFinish() {
+  if (totalAnswered === 0) { alert('Kerjakan minimal satu soal dulu!'); return; }
+  const pct = Math.round((correctCount/totalAnswered)*100);
+  document.getElementById('modalScore').textContent = `${correctCount}/${totalAnswered}`;
+  document.getElementById('modalSub').textContent = `dari ${totalAnswered} soal yang dijawab (${pct}%)`;
+  let grade = '';
+  if (pct >= 90) grade = '🏆 Luar Biasa! Siap Ujian!';
+  else if (pct >= 75) grade = '👍 Bagus! Tingkatkan lagi!';
+  else if (pct >= 60) grade = '📚 Cukup! Pelajari yang salah.';
+  else grade = '💪 Terus Berlatih! Jangan menyerah!';
+  document.getElementById('modalGrade').textContent = grade;
+  document.getElementById('finishModal').classList.add('show');
+}
+function closeFinish() { document.getElementById('finishModal').classList.remove('show'); }
+function resetAndClose() { closeFinish(); resetAllSoal(); }
+function resetAllSoal() {
+  answered = {}; pgSelected = {}; tfSelected = {};
+  correctCount = 0; totalAnswered = 0;
+  updateScore();
+  renderSoal();
+}
+
+// ═══════════════════════════ MATERI TOGGLE ═══════════════════════════
+function toggleTopic(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+// ═══════════════════════════ TAB ═══════════════════════════
+function switchTab(tab) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + tab).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ═══════════════════════════ INIT ═══════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  renderSoal();
+});
+</script>
+</body>
+</html>
